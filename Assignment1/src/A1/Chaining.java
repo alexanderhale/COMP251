@@ -1,3 +1,7 @@
+// Name: Alex Hale
+// ID: 260672475
+// Collaborators: none
+
 package A1;
 
 import java.util.*;
@@ -24,12 +28,13 @@ public class Chaining {
     }
 
     /**
-     * Implements the hash function h(k) = ((A · k) % 2w ) >> (w − r)
+     * Implements the hash function h(k) = ((A � k) % 2^w ) >> (w - r)
      */
     public int chain(int key) {
-        // TODO figure out what the >> (w-r) means
-        // TODO "Note that the value of A must be updated when you change w."
-        return (A*key) % (2*w);
+        // TODO do something with the line "Note that the value of A must be updated when you change w."
+    		// might be accounted for because a new object is created (and therefore a new A generated) for each new value of w?
+        return Math.abs((A*key) % m);
+        	// mod 2^w is written in the function description, but mod 2^r == m makes more sense so I think there's a mistake and I'm sticking with this
     }
 
     /**
@@ -48,7 +53,7 @@ public class Chaining {
         int collisions = 0;
         int slotToTry = chain(key);
         if (!isSlotEmpty(slotToTry)) {
-            collisions++;
+            collisions ++;
         }
         Table.get(slotToTry).add(key);
         return collisions;

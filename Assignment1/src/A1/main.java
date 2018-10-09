@@ -1,3 +1,7 @@
+// Name: Alex Hale
+// ID: 260672475
+// Collaborators: none
+
 package A1;
 
 import A1.Chaining.*;
@@ -125,12 +129,12 @@ public class main {
 
         Open_Addressing MyProbeTable = new Open_Addressing(w, 137);
         for (int i = 0; i < 16; i++) {
-            MyProbeTable.insertKey(keysToInsert[i]);
+            MyProbeTable.insertKey(keysToInsert[i]);		// insert 16 keys
         }
 
         for(int i = 0; i < 16; i++) {
-            removeCollisions.add((double) MyProbeTable.removeKey(keysToInsert[i]));
-            removeIndex.add((double) keysToInsert[i]);
+            removeCollisions.add((double) MyProbeTable.removeKey(keysToRemove[i]));		// remove specified keys
+            removeIndex.add((double) i);												// store index of key we just tried to remove
         }
 
         generateCSVOutputFile("remove_collisions.csv", removeIndex, removeCollisions, removeCollisions);
@@ -142,44 +146,53 @@ public class main {
          */
         //generating random hash tables with no seed can be done by sending -1
         //as the seed. You can read the generateRandom method for detail.
-        //randomNumber = generateRandom(0,55,-1);
-        //Chaining MyChainTable = new Chaining(w, -1);
-        //Open_Addressing MyProbeTable = new Open_Addressing(w, -1);
         //Lists to fill for the output CSV, exactly the same as in Task 1.
         ArrayList<Double> alphaList2 = new ArrayList<Double>();
         ArrayList<Double> avColListChain2 = new ArrayList<Double>();
         ArrayList<Double> avColListProbe2 = new ArrayList<Double>();
 
         // array of 10 different values of w
-            // TODO decide whether these values for 
-        int[] ws = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512};
+        int[] ws = {2, 5, 7, 9, 10, 11, 12, 14, 22, 25};
 
         // generate 16 random keys, ensuring that no 2 keys are the same
-            // why 16? Because I decided it should be 16
-                // TODO make sure the values of w are reasonable for 16 keys, or determine whether we need to vary the number of keys based on the value of w
+            // why 16? Because I arbitrarily decided it should be 16, it's not specified in the assignment
         int[] randomKeys = new int[16];
         for (int i = 0; i < 16; i++) {
-            randomKeys[i] = generateRandom(0, 200, -1);
+        	boolean tryAgain;
+        	do {
+        		tryAgain = false;
+        		int potential = generateRandom(0, 200, -1);		// generate a new key
+        		for (int j = 0; j < randomKeys.length; j++) {	// check all the other keys to see if this is a duplicate
+        			if (randomKeys[j] == potential) {
+        				tryAgain = true;
+        			}
+        		}
+        	} while (tryAgain);
         }
 
         for (int i = 0; i < ws.length; i++) {
-            for (int k = 0; k < 10; k++) {
+            double chainAverage = 0;
+            double probeAverage = 0;
+            
+            alphaList2.add((double) randomKeys.length / (double) power2((int) (ws[i] - 1) / 2 + 1));
+            
+        	for (int k = 0; k < 10; k++) {
                 Chaining MyChainTable2 = new Chaining(ws[i], -1);
                 Open_Addressing MyProbeTable2 = new Open_Addressing(ws[i], -1);
-
+                
+            	int chainTot = 0; 
+            	int probeTot = 0;
                 for (int j = 0; j < randomKeys.length; j++) {
-                    alphaList2.add((double) randomKeys.length / (double) power2((int) (ws[i] - 1) / 2 + 1));
-                    avColListChain2.add((double) MyChainTable2.insertKey(randomKeys[j]));
-                    avColListProbe2.add((double) MyProbeTable2.insertKey(randomKeys[j]));
+                    chainTot += MyChainTable2.insertKey(randomKeys[j]);
+                    probeTot += MyProbeTable2.insertKey(randomKeys[j]);
                 }
+                chainAverage += (double) chainTot / (double) randomKeys.length;
+                probeAverage += (double) probeTot / (double) randomKeys.length;
             }
-            // TODO remove these blanks if they're not needed
-            alphaList2.add(0.0);
-            avColListChain2.add(0.0);
-            avColListProbe2.add(0.0);
+        	avColListChain2.add(chainAverage / 10);
+        	avColListProbe2.add(probeAverage / 10);
         }
 
-        //TODO ADD YOUR CODE HERE
         generateCSVOutputFile("w_comparison.csv", alphaList2, avColListChain2, avColListProbe2);
     }
 

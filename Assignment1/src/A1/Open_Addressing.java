@@ -1,3 +1,7 @@
+// Name: Alex Hale
+// ID: 260672475
+// Collaborators: none
+
 package A1;
 
 import static A1.main.*;
@@ -12,13 +16,12 @@ public class Open_Addressing {
 
     //Constructor for the class. sets up the data structure for you
     protected Open_Addressing(int w, int seed) {
-
         this.w = w;
         this.r = (int) (w - 1) / 2 + 1;
         this.m = power2(r);
         this.A = generateRandom((int) power2(w - 1), (int) power2(w), seed);
         this.Table = new int[m];
-        //empty slots are initalized as -1, since all keys are positive
+        //empty slots are initialized as -1, since all keys are positive
         for (int i = 0; i < m; i++) {
             Table[i] = -1;
         }
@@ -28,8 +31,10 @@ public class Open_Addressing {
      * Implements the hash function g(k) = (h(k) + i) mod 2^r
      */
     public int probe(int key, int i) {
-        // TODO "Note that the value of A must be updated when you change w."
-        return (((A*key) % (2*w)) + i) % m;
+    	// TODO do something with the line "Note that the value of A must be updated when you change w."
+    		// might be accounted for because a new object is created (and therefore a new A generated) for each new value of w?
+        return Math.abs(((A*key) + i) % m);
+    		// mod 2^w is written in the function description, but mod 2^r == m makes more sense so I think there's a mistake and I'm sticking with this
     }
 
     /**
