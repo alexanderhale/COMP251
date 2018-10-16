@@ -1,0 +1,55 @@
+This comment file is divided in several section.
+
+SUBMISSION_&_COMPILE_SECTION-------------------------------------
+No error to report in this section
+-----------------------------------------------------------------
+
+RUNTIME_SECTION--------------------------------------------------
+Test open addressing probe
+(timeout: false) Testing default case grade: 0.0
+(timeout: false) Testing i grade: 0.0
+(timeout: false) Testing i modulo grade: 0.0
+(timeout: false) Testing different key 1 grade: 0.0
+(timeout: false) Testing different key 2 grade: 0.0
+(timeout: false) Testing overflow  grade: 0.0
+Probe 0.0
+Test chaining probe
+(timeout: false) Testing default case 13 grade: 0.0
+(timeout: false) Testing overflow case 19 grade: 0.0
+(timeout: false) Testing different key  grade: 0.0
+(timeout: false) Testing different key  grade: 0.0
+(timeout: false) Testing different key  grade: 0.0
+Chain 0.0
+Test insert key for chaining
+(timeout: false) Testing insert key into arraylist grade: 1.0
+(timeout: false) Testing insert at end of chain grade: 0.0
+(timeout: false) Testing collisions grade: 0.0
+Chain insert 1.0
+Test insert key for open addressing
+(timeout: false) Testing insert key  grade: 1.0
+(timeout: false) Testing insert key when full  grade: 1.0
+(timeout: false) Testing collisions  grade: 0.0
+Open insert 2.0
+Test remove key for open addressing
+(timeout: false) Testing remove key default case grade: 1.0
+(timeout: false) Testing remove key more than 1 collided case grade: 1.0
+(timeout: false) Testing removing key with more than 1 collided then adding a key back grade: 0.0
+(timeout: false) Testing collisions grade: 0.0
+Open remove 2.0
+Test main
+(timeout: false) Test n_comparison chain grade: 0.0
+(timeout: false) Test n_comparison open grade: 0.0
+(timeout: false) Test remove_comparison grade: 0.0
+(timeout: false) Test w_comparison grade: 1.0
+Main 1.0
+Total Score: 22.5
+
+---------------------------------------------------------------
+
+FOOTNOTE-------------------------------------------------------
+If you have general questions about how this assignment was graded, then please contact cs251@cs.mcgill.ca.
+Note : A 'cannot find symbol' compilation error may come from extra and thus forbidden imports. A forbidden import causing a compilation failure justifies a 0.
+If you believe that an error was made, please send an argumented and detailed report to cs251@cs.mcgill.ca.
+Questions about the course material or this assignment should be addressed to TAs during office hours.
+Any other request should be addressed to the lecturers.
+---------------------------------------------------------------
