@@ -1,3 +1,7 @@
+// Name: Alex Hale
+// ID: 260672475
+// Collaborators: none
+
 package A2;
 import java.io.*;
 import java.util.*;
@@ -55,18 +59,32 @@ public class DisjointSets {
     
     /* find resentative of element i */
     public int find(int i) {
-
-        /* Fill this method (The statement return 0 is here only to compile) */
-        return 0;
-        
+    	if (par[i] == i) {
+    		// if we're at a root, return it
+    		return i;
+    	} else {
+    		// otherwise, perform path compression:
+    			// make all nodes on the "find path" direct children of the root
+    		par[i] = find(par[i]);
+    		return par[i];
+    	}       
     }
 
     /* merge sets containing elements i and j */
     public int union(int i, int j) {
-    
-        /* Fill this method (The statement return 0 is here only to compile) */
-        return 0;
-        
+    	if (rank[i] > rank[j]) {
+    		par[j] = par[i];		// merge the set with the smaller rank into the set with the larger rank
+    		// TODO update the ranks?
+    		return par[j];			// return the resulting root of the merge (the representative)
+    	} else {
+    		par[i] = par[j];		// merge the set with the smaller rank into the set with the larger rank
+
+    		if (rank[i] == rank[j]) {		// update the rank 
+    			rank[j]++;					// TODO update the ranks properly
+    		}
+
+    		return par[i];			// return the resulting root of the merge (the representative)
+    	}
     }
     
     public static void main(String[] args) {

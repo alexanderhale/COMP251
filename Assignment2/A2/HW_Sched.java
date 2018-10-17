@@ -1,3 +1,7 @@
+// Name: Alex Hale
+// ID: 260672475
+// Collaborators: none
+
 package A2;
 import java.util.*;
 
@@ -27,7 +31,7 @@ class Assignment implements Comparator<Assignment>{
 	 */
 	@Override
 	public int compare(Assignment a1, Assignment a2) {
-		//YOUR CODE GOES HERE, DONT FORGET TO EDIT THE RETURN STATEMENT
+		//TODO YOUR CODE GOES HERE, DONT FORGET TO EDIT THE RETURN STATEMENT
 		
 		
 		return 0;
@@ -64,7 +68,8 @@ public class HW_Sched {
 		
 		//Initializes the homeworkPlan, which you must fill out and output
 		int[] homeworkPlan = new int[Assignments.size()];
-		//YOUR CODE GOES HERE
+
+		// TODO YOUR CODE GOES HERE
 	
 		
 		return homeworkPlan;
