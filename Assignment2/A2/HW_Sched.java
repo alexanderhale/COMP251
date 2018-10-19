@@ -29,12 +29,24 @@ class Assignment implements Comparator<Assignment>{
 	 * Return 1 if a1 should appear before a2
 	 * Return 0 if a1 and a2 are equivalent 
 	 */
-	@Override
+	@Override 		// override the default comparison method
 	public int compare(Assignment a1, Assignment a2) {
-		//TODO YOUR CODE GOES HERE, DONT FORGET TO EDIT THE RETURN STATEMENT
-		
-		
-		return 0;
+		// compare by deadline, prioritize the assignment with the sooner deadline
+		if (a1.deadline < a2.deadline) {
+			return -1;
+		} else if (a1.deadline > a2.deadline) {
+			return 1;
+		} else {
+			// a1 and a2 have the same deadline, compare value
+			if (a1.weight < a2.weight) {
+				return 1;
+			} else if (a1.weight > a2.weight) {
+				return -1;
+			} else {
+				// if both weight and deadline are the same, return no preference
+				return 0;
+			}
+		}
 	}
 }
 
@@ -61,15 +73,59 @@ public class HW_Sched {
 	 * The homework you complete first will be given an output of 1, the second, 2, etc.
 	 */
 	public int[] SelectAssignments() {
+		
+		// TODO remove
+		System.out.print("Input list: ");
+		for (Assignment a : Assignments) {
+			System.out.print(a.number + " ");
+		}
+		System.out.print("\n");
+		
 		//Use the following command to sort your Assignments: 
 		//Collections.sort(Assignments, new Assignment());
 		//This will re-order your assignments. The resulting order will depend on how the compare function is implemented
+			// NOTE: I implemented the compare() function such that this list is now in order of ascending due time
+				// if two functions have the same due time, they are sorted by value
+					// if they have the same value and due time, they are identical and therefore sorted randomly
 		Collections.sort(Assignments, new Assignment());
+
+		// TODO remove
+		System.out.print("Sorted list: ");
+		for (Assignment a : Assignments) {
+			System.out.print(a.number + " ");
+		}
+		System.out.print("\n");
+
+		System.out.print("Deadlines: ");
+		for (Assignment a : Assignments) {
+			System.out.print(a.deadline + " ");
+		}
+		System.out.print("\n");
+
+		System.out.print("Weights: ");
+		for (Assignment a : Assignments) {
+			System.out.print(a.weight + " ");
+		}
+		System.out.print("\n");
 		
 		//Initializes the homeworkPlan, which you must fill out and output
 		int[] homeworkPlan = new int[Assignments.size()];
 
-		// TODO YOUR CODE GOES HERE
+		// iterate through the entire collecton of assignments
+		int lastFinishingTime = 0;
+		for (Assignment a : Assignments) {
+			// find the finishing time (NOT the deadline) of the last assignment in the homeworkPlan (use variable)
+
+			// if the deadline of a is >= this finishing time, add a to the homeworkPlan as the next in line
+			if (a.deadline > lastFinishingTime) {
+				lastFinishingTime++;
+				homeworkPlan[a.number] = lastFinishingTime;
+			} else {
+				// otherwise, decide that a will not be completed
+				homeworkPlan[a.number] = 0;
+			}
+			// TODO figure out how lastDeadline should be used
+		}
 	
 		
 		return homeworkPlan;
