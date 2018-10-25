@@ -1,7 +1,3 @@
-// Name: Alex Hale
-// ID: 260672475
-// Collaborators: none
-
 package A2;
 import java.util.Arrays;
 

@@ -1,3 +1,7 @@
+// Name: Alex Hale
+// ID: 260672475
+// Collaborators: none
+
 package A2;
 import java.util.*;
 import A2.DisjointSets;
@@ -51,7 +55,7 @@ public class Kruskal{
         } else {
             return true;
         }
-        // TODO fix this, it's definitely not right
+        // NOTE not sure if this is right?
             // an edge can be added to a component without making a cycle and the component can keep the same representative node
     }
 

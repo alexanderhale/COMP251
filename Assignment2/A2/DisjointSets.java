@@ -73,17 +73,43 @@ public class DisjointSets {
     /* merge sets containing elements i and j */
     public int union(int i, int j) {
     	if (rank[i] > rank[j]) {
-    		par[j] = par[i];		// merge the set with the smaller rank into the set with the larger rank
-    		// TODO update the ranks?
+    		// merge the set with the smaller rank into the set with the larger rank
+            // make all nodes that have par[x] = par[i] to now have par[x] = par[j]
+            int old = par[j];
+            for (int t = 0; t < par.length; t++) {
+                if (par[t] == old) {
+                    par[t] = par[i];
+                }
+            }
+
+            rank[j] = rank[i];
+    		
+            return par[i];			// return the resulting root of the merge (the representative)
+    	} else if (rank[i] == rank[j]) {
+            // make all nodes that have par[x] = par[i] to now have par[x] = par[j]
+            int old = par[i];
+            for (int t = 0; t < par.length; t++) {
+                if (par[t] == old) {
+                    par[t] = par[j];
+                }
+            }
+
+            rank[j]++;              // when rank[i] == rank[j], the rank of the new root increases by 1
+
+            return par[j];
+        } else {
+            // merge the set with the smaller rank into the set with the larger rank
+            // make all nodes that have par[x] = par[i] to now have par[x] = par[j]
+            int old = par[i];
+            for (int t = 0; t < par.length; t++) {
+                if (par[t] == old) {
+                    par[t] = par[j];
+                }
+            }
+	
+            rank[i] = rank[j];      // update the ranks
+
     		return par[j];			// return the resulting root of the merge (the representative)
-    	} else {
-    		par[i] = par[j];		// merge the set with the smaller rank into the set with the larger rank
-
-    		if (rank[i] == rank[j]) {		// update the rank 
-    			rank[j]++;					// TODO update the ranks properly
-    		}
-
-    		return par[i];			// return the resulting root of the merge (the representative)
     	}
     }
     

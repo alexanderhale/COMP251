@@ -25,8 +25,8 @@ class Assignment implements Comparator<Assignment>{
 	/**
 	 * This method is used to sort to compare assignment objects for sorting. 
 	 * The way you implement this method will define which order the assignments appear in when you sort.
-	 * Return -1 if a1 should appear after a2
-	 * Return 1 if a1 should appear before a2
+	 * Return 1 if a1 should appear after a2
+	 * Return -1 if a1 should appear before a2
 	 * Return 0 if a1 and a2 are equivalent 
 	 */
 	@Override 		// override the default comparison method
@@ -72,15 +72,7 @@ public class HW_Sched {
 	 * @return Array where output[i] corresponds to when assignment #i will be completed. output[i] is 0 if assignment #i is never completed.
 	 * The homework you complete first will be given an output of 1, the second, 2, etc.
 	 */
-	public int[] SelectAssignments() {
-		
-		// TODO remove
-		System.out.print("Input list: ");
-		for (Assignment a : Assignments) {
-			System.out.print(a.number + " ");
-		}
-		System.out.print("\n");
-		
+	public int[] SelectAssignments() {	
 		//Use the following command to sort your Assignments: 
 		//Collections.sort(Assignments, new Assignment());
 		//This will re-order your assignments. The resulting order will depend on how the compare function is implemented
@@ -88,25 +80,6 @@ public class HW_Sched {
 				// if two functions have the same due time, they are sorted by value
 					// if they have the same value and due time, they are identical and therefore sorted randomly
 		Collections.sort(Assignments, new Assignment());
-
-		// TODO remove
-		System.out.print("Sorted list: ");
-		for (Assignment a : Assignments) {
-			System.out.print(a.number + " ");
-		}
-		System.out.print("\n");
-
-		System.out.print("Deadlines: ");
-		for (Assignment a : Assignments) {
-			System.out.print(a.deadline + " ");
-		}
-		System.out.print("\n");
-
-		System.out.print("Weights: ");
-		for (Assignment a : Assignments) {
-			System.out.print(a.weight + " ");
-		}
-		System.out.print("\n");
 		
 		//Initializes the homeworkPlan, which you must fill out and output
 		int[] homeworkPlan = new int[Assignments.size()];
@@ -124,7 +97,6 @@ public class HW_Sched {
 				// otherwise, decide that a will not be completed
 				homeworkPlan[a.number] = 0;
 			}
-			// TODO figure out how lastDeadline should be used
 		}
 	
 		
