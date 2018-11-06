@@ -1,0 +1,45 @@
+This comment file is divided in several section.
+
+SUBMISSION_&_COMPILE_SECTION-------------------------------------
+No error to report in this section
+-----------------------------------------------------------------
+
+RUNTIME_SECTION--------------------------------------------------
+This is the COMP251 Assignment 2 Grader
+Question 1 - Disjoint Sets
+(timeout: false) Testing non-action state; find does not change states grade: 1.0
+(timeout: false) Testing simple union grade: 1.0
+(timeout: false) Testing repeated union grade: 1.0
+(timeout: false) Testing preservation of representation grade: 1.0
+(timeout: false) Testing union by rank grade: 0.0
+Disjoint sets: 4.0
+Question 2 - MST
+(timeout: false) Testing isSafe grade: 1.0
+(timeout: false) Testing kruskal; (case: 3-star) grade: 1.0
+(timeout: false) Testing kruskal; (case: 4 pan graph) grade: 1.0
+(timeout: false) Testing kruskal; (case: disjoint) grade: 1.0
+(timeout: false) Testing kruskal; (case: dumbbell) grade: 1.0
+(timeout: false) Testing kruskal; (case: dumbbell with distractors) grade: 1.0
+MST: 6.0
+Question 3
+(timeout: false) Testing correct length of output grade: 1.0
+(timeout: false) Testing for negative numbers grade: 1.0
+(timeout: false) Testing for slot conflicts grade: 1.0
+(timeout: false) Testing for completion before deadline grade: 1.0
+(timeout: false) Testing scheduling; (case: no conflicts) grade: 2.0
+(timeout: false) Testing scheduling; (case : weight advantage) grade: 0.0
+(timeout: false) Testing scheduling; (case: homework overwhelming) grade: 1.0
+(timeout: false) Testing scheduling; (case: slacker's paradise) grade: 1.0
+(timeout: false) Testing scheduling; (case: overlapping conflicts) grade: 1.0
+Greedy: 9.0
+Total Score: 78.5
+
+---------------------------------------------------------------
+
+FOOTNOTE-------------------------------------------------------
+If you have general questions about how this assignment was graded, then please contact cs251@cs.mcgill.ca.
+Note : A 'cannot find symbol' compilation error may come from extra and thus forbidden imports. A forbidden import causing a compilation failure justifies a 0.
+If you believe that an error was made, please send an argumented and detailed report to cs251@cs.mcgill.ca.
+Questions about the course material or this assignment should be addressed to TAs during office hours.
+Any other request should be addressed to the lecturers.
+---------------------------------------------------------------
