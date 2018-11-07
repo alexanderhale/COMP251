@@ -1,3 +1,9 @@
+// Name: Alex Hale
+// ID: 260672475
+// Collaborators: none
+
+import java.util.*;
+
 public class BellmanFord{
 
 	
@@ -56,20 +62,68 @@ public class BellmanFord{
          *  
          *  When throwing an exception, choose an appropriate one from the ones given above
          */
-        
-        /* YOUR CODE GOES HERE */
+
+        int nbNodes = g.getNbNodes();
+        int nbEdges = g.getEdges().size();
+        distances = new int[nbNodes];
+        this.source = source;
+
+        // initialize distances as infinite except the distance from the source to the source
+        for (int i = 0; i < distances.length; i++) {
+            distances[i] = Integer.MAX_VALUE;
+        }
+        distances[source] = 0;
+
+        // relax all edges nbNodes - 1 times
+        for (int i = 0; i < nbNodes; ++i) {             // TODO what does ++i do?
+            for (Edge e : g.getEdges()) {
+                // relax edge
+                if (distances[e.nodes[0]] != Integer.MAX_VALUE && (distances[e.nodes[0]] + e.weight) < distances[e.nodes[1]]) {
+                    distances[e.nodes[1]] = distances[e.nodes[0]] + e.weight;
+
+                    // TODO fill predecessors
+                }
+            }
+        }
+
+        // check if g contains a negative cycle
+        for (Edge e : g.getEdges()) {
+            if (distances[e.nodes[0]] != Integer.MAX_VALUE && (distances[e.nodes[0]] + e.weight) < distances[e.nodes[1]]) {
+                // if there's a negative weight cycle, throw an exception and don't allow the constructor to terminate
+                throw new NegativeWeightException("This graph contains a negative-weight cycle!");
+            }
+        }
     }
 
     public int[] shortestPath(int destination) throws BellmanFordException{
         /*Returns the list of nodes along the shortest path from 
          * the object source to the input destination
-         * If not path exists an Exception is thrown
+         * If path doesn't exist an Exception is thrown
          * Choose appropriate Exception from the ones given 
          */
 
-        /* YOUR CODE GOES HERE (update the return statement as well!) */
-        
-        return null;
+        int current = destination;
+        int iterations = 0;
+        ArrayList<Integer> path = new ArrayList<Integer>();
+        while (path.get(path.size() - 1) != this.source && iterations < distances.length - 1) {     // TODO check that comparison, fewer?
+            path.add(current);
+            current = predecessors[current];
+            iterations++;
+        }
+
+        if (path.get(path.size() - 1) != this.source) {
+            // a path doesn't exist, throw an exception
+            throw new PathDoesNotExistException("No path from source to destination found.");
+        }
+
+        // construct int array, ordered from source to destination
+        int[] result = new int[path.size()];
+        for (int i = path.size() - 1; i >= 0; i--) {
+            result[i] = path.get(0);
+            path.remove(0);
+        }
+
+        return result;
     }
 
     public void printPath(int destination){
