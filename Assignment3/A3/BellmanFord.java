@@ -66,6 +66,7 @@ public class BellmanFord{
         int nbNodes = g.getNbNodes();
         int nbEdges = g.getEdges().size();
         distances = new int[nbNodes];
+        predecessors = new int[nbNodes];
         this.source = source;
 
         // initialize distances as infinite except the distance from the source to the source
@@ -75,13 +76,11 @@ public class BellmanFord{
         distances[source] = 0;
 
         // relax all edges nbNodes - 1 times
-        for (int i = 0; i < nbNodes; ++i) {             // TODO what does ++i do?
+        for (int i = 0; i < nbNodes; i++) {
             for (Edge e : g.getEdges()) {
                 // relax edge
                 if (distances[e.nodes[0]] != Integer.MAX_VALUE && (distances[e.nodes[0]] + e.weight) < distances[e.nodes[1]]) {
                     distances[e.nodes[1]] = distances[e.nodes[0]] + e.weight;
-
-                    // TODO fill predecessors
                 }
             }
         }
@@ -93,6 +92,32 @@ public class BellmanFord{
                 throw new NegativeWeightException("This graph contains a negative-weight cycle!");
             }
         }
+
+        // fill predecessors array
+        for (int i = 0; i < nbNodes; i++) {
+            // default value indicating no predecessor
+            predecessors[i] = -1;
+            
+            if (distances[i] == Integer.MAX_VALUE) {
+                // if the distance is still infinite, this node is not reachable
+                predecessors[i] = Integer.MAX_VALUE;
+            } else {
+                // scan the distances
+                for (int j = 0; j < nbNodes; j++) {
+                    // if there's an edge from node j to node i
+                    Edge e = g.getEdge(j, i);
+
+                    if (e != null && e.weight != 0) {
+
+                        // if the shortest-path distance at node j is e.weight less than the shortest-path
+                        // distance at node i, j is i's predecessor
+                        if (distances[j] == distances[i] - e.weight) {
+                            predecessors[i] = j;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public int[] shortestPath(int destination) throws BellmanFordException{
@@ -102,13 +127,18 @@ public class BellmanFord{
          * Choose appropriate Exception from the ones given 
          */
 
-        int current = destination;
-        int iterations = 0;
         ArrayList<Integer> path = new ArrayList<Integer>();
-        while (path.get(path.size() - 1) != this.source && iterations < distances.length - 1) {     // TODO check that comparison, fewer?
-            path.add(current);
-            current = predecessors[current];
-            iterations++;
+        int current = destination;
+        path.add(current);
+        int iterations = 0;
+        while (path.get(path.size() - 1) != this.source && iterations < distances.length - 1) {
+            if (current == -1 || current == Integer.MAX_VALUE) {
+                throw new PathDoesNotExistException("No path from source to destination found.");
+            } else {
+                current = predecessors[current];
+                path.add(current);
+                iterations++;
+            }   
         }
 
         if (path.get(path.size() - 1) != this.source) {
