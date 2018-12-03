@@ -1,0 +1,70 @@
+This comment file is divided in several section.
+
+SUBMISSION_&_COMPILE_SECTION-------------------------------------
+Late Submission: 1 day(s) late.
+Submitted on 2018-11-08 10:18:00
+Penalty: 16 Points
+-----------------------------------------------------------------
+
+RUNTIME_SECTION--------------------------------------------------
+This is the COMP251 Assignment 3 Grader
+Question 1 - Ford Fulkerson
+0
+0 9
+10
+0 1 10
+0 2 5
+2 3 5
+1 3 10
+4 5 10
+4 6 5
+6 7 5
+6 8 10
+8 9 10
+5
+0 5
+7
+0 1 5
+0 2 5
+2 4 5
+1 3 5
+1 6 5
+3 0 10
+3 5 5
+5
+0 9
+10
+0 1 10
+0 2 5
+2 3 5
+1 3 10
+3 4 5
+4 5 10
+4 6 5
+6 7 5
+6 8 5
+8 9 5
+(timeout: false) Testing dfs - weights grade: Mark [1.0 / 1.0]
+(timeout: false) Testing dfs - cycles grade: Mark [1.0 / 1.0]
+(timeout: false) Testing ford fulkerson - dumbbell grade: Mark [0.0 / 2.0]
+(timeout: false) Testing ford fulkerson - cycle grade: Mark [0.0 / 2.0]
+(timeout: false) Testing ford fulkerson - no path grade: Mark [2.0 / 2.0]
+Ford fulkerson : Mark [4.0 / 8.0]
+(timeout: false) Testing bellmanford - default case 1 grade: Mark [2.0 / 2.0]
+(timeout: false) Testing bellmanford - default case 2 grade: Mark [2.0 / 2.0]
+(timeout: false) Testing bellmanford - case negative loop grade: Mark [2.0 / 2.0]
+(timeout: false) Testing bellmanford - case non-positive loop grade: Mark [2.0 / 2.0]
+(timeout: false) Testing bellmanford - case no path grade: Mark [2.0 / 2.0]
+Bellmanford : Mark [10.0 / 10.0]
+Total score: 60.0
+Done
+
+---------------------------------------------------------------
+
+FOOTNOTE-------------------------------------------------------
+If you have general questions about how this assignment was graded, then please contact cs251@cs.mcgill.ca.
+Note : A 'cannot find symbol' compilation error may come from extra and thus forbidden imports. A forbidden import causing a compilation failure justifies a 0.
+If you believe that an error was made, please send an argumented and detailed report to cs251@cs.mcgill.ca.
+Questions about the course material or this assignment should be addressed to TAs during office hours.
+Any other request should be addressed to the lecturers.
+---------------------------------------------------------------
