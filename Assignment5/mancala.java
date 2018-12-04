@@ -10,34 +10,38 @@ import static java.lang.System.out;
 
 public class mancala {
 
-	private Integer nbProblems;
-	private ArrayList<ArrayList<Boolean>> pebbles = new ArrayList<ArrayList<Boolean>>();
+	private static Integer nbProblems;
+	private static ArrayList<ArrayList<Boolean>> pebbles = new ArrayList<ArrayList<Boolean>>();
 
 	public static void main(String[] args) {
-		try {
-            Scanner f = new Scanner(new File("testBalloons.txt"));
-            String[] ln = f.nextLine().split("\\s+"); 					/*first line is the number of problems in the file*/
-            this.nbProblems = Integer.parseInt(ln[0]);
+		gatherInputData();
+        minPebbles();
+        sendOutputData();
+	}
 
-            for (int i = 0; i < nbProblems; i++) {						// iterate through the line for each problem
-            	ln = f.nextLine().split("\\s+");
+    public static void gatherInputData() {
+        try {
+            Scanner f = new Scanner(new File("testMancala.txt"));
+            String[] ln = f.nextLine().split("\\s+");                   /*first line is the number of problems in the file*/
+            nbProblems = Integer.parseInt(ln[0]);
 
-            	ArrayList<Boolean> temp = new ArrayList<Boolean>();
-            	for (int j = 0; j < 12; j++) {							// store the locations of the pebbles
-            		Integer value = Integer.parseInt(ln[i]);
+            for (int i = 0; i < nbProblems; i++) {                      // iterate through the line for each problem
+                ln = f.nextLine().split("\\s+");
 
-            		if (value == 0) {
-            			temp.add(false);
-            		} else {
-            			temp.add(true);
-            		}
-            	}
-            	pebbles.add(temp);
+                ArrayList<Boolean> temp = new ArrayList<Boolean>();
+                for (int j = 0; j < 12; j++) {                          // store the locations of the pebbles
+                    if (Integer.parseInt(ln[j]) == 0) {
+                        temp.add(false);
+                    } else {
+                        temp.add(true);
+                    }
+                }
+                pebbles.add(temp);
             }
 
             /*Sanity checks*/
             if (pebbles.size() != nbProblems){
-                throw new RuntimeException("There are " + pebbles.size() + " problems stored while the file specifies " + this.nbProblems + " problems.");
+                throw new RuntimeException("There are " + pebbles.size() + " problems stored while the file specifies " + nbProblems + " problems.");
             }
 
         }
@@ -45,12 +49,14 @@ public class mancala {
             System.out.println("File not found!");
             System.exit(1);
         }
+    }
 
-        minPebbles();
+	public static void minPebbles() {
+		// TODO find the min number of pebbles left in each problem
+        System.out.println(pebbles.toString());     // TODO remove this test
 	}
 
-	void minPebbles() {
-		// TODO print number of arrows required for each problem on individual lines in a file called testBalloons_solution.txt
-	}
-
+    public static void sendOutputData() {
+        // TODO print min pebbles left in each problem on individual lines in a file called testMancala_solution.txt
+    }
 }
