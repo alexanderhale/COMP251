@@ -77,11 +77,10 @@ public class islands {
                 }
                 islands.add(temp);
             }
-            System.out.println("here");     // TODO remove
 
             // check the 4 adjacent pixels to see if any of them are part of an island
             for (int j = 0; j < allData.get(i).size(); j++) {
-                for (int t = 0; j < allData.get(i).get(j).size(); t++) {
+                for (int t = 0; t < allData.get(i).get(j).size(); t++) {
                     if (allData.get(i).get(j).get(t) == true) {
                         int[] connecting = new int[2];
 
@@ -106,10 +105,13 @@ public class islands {
                             // set this pixel to belong to either of the 2 islands, doesn't matter which
                             islands.get(j).set(t, connecting[0]);
 
-                            if (pairs.get(connecting[0]) != connecting[1] && pairs.get(connecting[1]) != connecting[0]) {
-                                // this pair has not yet been found, save it
-                                pairs.put(connecting[0], connecting[1]);
-                                System.out.println(connecting[1] + ", " + pairs.get(connecting[0]));        // TODO remove
+                            if (pairs.containsKey(connecting[0]) && pairs.get(connecting[0]) != connecting[1]) {
+                        		// this pair has not yet been found, save it
+                        		pairs.put(connecting[0], connecting[1]);
+                            } else if (pairs.containsKey(connecting[1]) && pairs.get(connecting[1]) != connecting[0]) {
+                            	pairs.put(connecting[1], connecting[0]);
+                            } else if (!pairs.containsKey(connecting[0]) && !pairs.containsKey(connecting[1])) {
+                            	pairs.put(connecting[0], connecting[1]);
                             }
                         }
                     } else {
@@ -117,6 +119,9 @@ public class islands {
                     }
                 }
             }
+
+            System.out.println(pairs.toString());	// TODO remove
+            System.out.println();
 
             // adjust the total pairs to remove all the matches
             result[i] -= pairs.size();
