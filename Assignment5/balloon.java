@@ -12,6 +12,7 @@ public class balloon {
 
 	private static Integer nbProblems;
 	private static ArrayList<ArrayList<Integer>> balloons = new ArrayList<ArrayList<Integer>>();
+	private static int[] result;
 
 	public static void main(String[] args) {
         gatherInputData();
@@ -51,12 +52,52 @@ public class balloon {
     }
 
 	public static void calculateArrows() {
-		// TODO calculate minimum number of arrows to pop all balloons
-        System.out.println(balloons.toString());     // TODO remove this test
+		result = new int[nbProblems];
+
+		for (int i = 0; i < nbProblems; i++) {
+			// repeat until all balloons popped (i.e. removed)
+			while (balloons.get(i).size() > 0) {
+				// we've used an arrow
+				result[i]++;
+
+				// find the highest unpopped balloon
+				int max = Collections.max(balloons.get(i));
+
+				// pop the first occurence of a balloon at that height
+				int indexOfPopped = balloons.get(i).indexOf(max);
+				balloons.get(i).remove(indexOfPopped);
+
+				// check if there's a balloon at height max-1 that is to the right of the balloon we just popped
+				max--;
+				while (max > 0 && !balloons.get(i).isEmpty() &&
+					   balloons.get(i).subList(indexOfPopped, balloons.get(i).size()).contains(max)) {
+					// if such a balloon exists, pop that one too
+					int oldIndexOfPopped = indexOfPopped;
+					indexOfPopped = balloons.get(i).subList(oldIndexOfPopped, balloons.get(i).size()).indexOf(max) + balloons.get(i).subList(0, oldIndexOfPopped).size();
+					balloons.get(i).remove(indexOfPopped);
+
+					max--;
+				}
+			}
+		}
 	}
 
     public static void sendOutputData() {
-        // TODO print number of arrows required for each problem on individual lines in a file called testBalloons_solution.txt
+        // print number of arrows required for each problem on individual lines in a file called testBalloons_solution.txt
+        //File file = new File(testIslands_solution.txt);
+        //file.createNewFile();
+        try {
+            FileWriter fw = new FileWriter("testBalloons_solution.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (int i = 0; i < nbProblems; i++) {
+                bw.write(result[i] + "\n");
+            }
+
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
