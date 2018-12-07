@@ -63,13 +63,14 @@ public class islands {
 	public static void numIslands() {
         result = new int[nbProblems];
 
+        // iterate through each problem
         for (int i = 0; i < nbProblems; i++) {
             // create a holding array to work in
             ArrayList<ArrayList<Integer>> islands = new ArrayList<ArrayList<Integer>>();
             Map<Integer, Integer> pairs = new HashMap<Integer, Integer>();
 
             // fill the holding array with zeros
-                // TODO remove this if we're in a time crunch, it's probably not necessary
+                // remove this if we're in a time crunch, it's probably not necessary
             for (int j = 0; j < allData.get(i).size(); j++) {
                 ArrayList<Integer> temp = new ArrayList<Integer>();
                 for (int t = 0; t < allData.get(i).get(j).size(); t++) {
@@ -78,7 +79,7 @@ public class islands {
                 islands.add(temp);
             }
 
-            // check the 4 adjacent pixels to see if any of them are part of an island
+            // check the 2 lagging adjacent pixels to see if either of them are part of an island
             for (int j = 0; j < allData.get(i).size(); j++) {
                 for (int t = 0; t < allData.get(i).get(j).size(); t++) {
                     if (allData.get(i).get(j).get(t) == true) {
@@ -120,19 +121,38 @@ public class islands {
                 }
             }
 
-            System.out.println(pairs.toString());	// TODO remove
-            System.out.println();
+            // find the number of unique islands
+                // at this stage: result[i] holds the max number, pairs holds the connections
+                // should probably do this with a graph, but I'm not allowed to call a separate Graph class
+            boolean[] islanded = new boolean[result[i]];
+            for (int z = 0; z < islanded.length; z++) {
+                if (pairs.containsKey(z)) {
+                    islanded[z] = false;
+                }
+
+                while (pairs.containsKey(z)) {
+                    islanded[pairs.get(z) - 1] = true;
+                    pairs.remove(z, pairs.get(z));
+                }
+            }
+
+            result[i] = 0;
+
+            for (int z = 0; z < islanded.length; z++) {
+                if (islanded[z] == false) {
+                    result[i]++;
+                }
+            }
 
             // adjust the total pairs to remove all the matches
-            result[i] -= pairs.size();
+            // result[i] -= pairs.size();
                 // TODO verify that this logic works
+                // TODO make this a proper graph reduction situation
         }
 	}
 
     public static void sendOutputData() {
         // print number of islands in each problem on individual lines in a file called testIslands_solution.txt
-        //File file = new File(testIslands_solution.txt);
-        //file.createNewFile();
         try {
             FileWriter fw = new FileWriter("testIslands_solution.txt");
             BufferedWriter bw = new BufferedWriter(fw);

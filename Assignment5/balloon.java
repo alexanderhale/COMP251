@@ -54,6 +54,7 @@ public class balloon {
 	public static void calculateArrows() {
 		result = new int[nbProblems];
 
+        // iterate through each problem
 		for (int i = 0; i < nbProblems; i++) {
 			// repeat until all balloons popped (i.e. removed)
 			while (balloons.get(i).size() > 0) {
@@ -84,8 +85,6 @@ public class balloon {
 
     public static void sendOutputData() {
         // print number of arrows required for each problem on individual lines in a file called testBalloons_solution.txt
-        //File file = new File(testIslands_solution.txt);
-        //file.createNewFile();
         try {
             FileWriter fw = new FileWriter("testBalloons_solution.txt");
             BufferedWriter bw = new BufferedWriter(fw);
