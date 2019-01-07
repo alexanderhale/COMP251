@@ -1,0 +1,46 @@
+This comment file is divided in several section.
+
+SUBMISSION_&_COMPILE_SECTION-------------------------------------
+No error to report in this section
+-----------------------------------------------------------------
+
+RUNTIME_SECTION--------------------------------------------------
+This is the COMP251 Assignment 4 Grader
+64
+144
+144
+(timeout: false) Testing naive - default grade: Mark [1.0 / 1.0]
+(timeout: false) Testing naive - one positive, one negative grade: Mark [0.5 / 0.5]
+(timeout: false) Testing naive - negative*negative grade: Mark [0.5 / 0.5]
+(timeout: false) Testing naive - number of bits: 1 grade: Mark [1.0 / 1.0]
+(timeout: false) Testing naive - number of bits: even grade: Mark [1.0 / 1.0]
+(timeout: false) Testing naive - number of bits: odd grade: Mark [1.0 / 1.0]
+(timeout: false) Testing naive - op counts : 1 bit grade: Mark [1.0 / 1.0]
+(timeout: false) Testing naive - op counts : even bits grade: Mark [1.0 / 1.0]
+(timeout: false) Testing naive - op counts : odd bits grade: Mark [1.0 / 1.0]
+Naive : Mark [8.0 / 8.0]
+64
+144
+144
+(timeout: false) Testing karatsuba - default grade: Mark [1.0 / 1.0]
+(timeout: false) Testing karatsuba - one positive, one negative grade: Mark [0.5 / 0.5]
+(timeout: false) Testing karatsuba - negative*negative grade: Mark [0.5 / 0.5]
+(timeout: false) Testing karatsuba - number of bits: 1 grade: Mark [1.0 / 1.0]
+(timeout: false) Testing karatsuba - number of bits: even grade: Mark [1.0 / 1.0]
+(timeout: false) Testing karatsuba - number of bits: odd grade: Mark [1.0 / 1.0]
+(timeout: false) Testing karatsuba - op counts : 1 bit grade: Mark [1.0 / 1.0]
+(timeout: false) Testing karatsuba - op counts : even bits grade: Mark [1.0 / 1.0]
+(timeout: false) Testing karatsuba - op counts : odd bits grade: Mark [1.0 / 1.0]
+Karatsuba : Mark [8.0 / 8.0]
+Total score: 50.0
+Done
+
+---------------------------------------------------------------
+
+FOOTNOTE-------------------------------------------------------
+If you have general questions about how this assignment was graded, then please contact cs251@cs.mcgill.ca.
+Note : A 'cannot find symbol' compilation error may come from extra and thus forbidden imports. A forbidden import causing a compilation failure justifies a 0.
+If you believe that an error was made, please send an argumented and detailed report to cs251@cs.mcgill.ca.
+Questions about the course material or this assignment should be addressed to TAs during office hours.
+Any other request should be addressed to the lecturers.
+---------------------------------------------------------------
